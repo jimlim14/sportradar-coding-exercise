@@ -1,4 +1,22 @@
-function Scoreboard () {
+import { useState } from 'react';
+
+function Scoreboard() {
+	const [game, setGame] = useState({
+		id: 1,
+		homeTeam: '',
+		awayTeam: '',
+		homeTeamScore: 0,
+		awayTeamScore: 0,
+	});
+
+	function handleChange(e) {
+		const { name, value } = e.target;
+		setGame((prev) => ({
+			...prev,
+			[name]: value,
+		}));
+	}
+
 	return (
 		<>
 			<h1>Scoreboard</h1>
@@ -8,15 +26,15 @@ function Scoreboard () {
 						type='text'
 						placeholder='Home Team'
 						name='homeTeam'
-						value={''}
-						onChange={''}
+						value={game.homeTeam}
+						onChange={handleChange}
 					/>
 					<input
 						type='text'
 						placeholder='Away Team'
 						name='awayTeam'
-						value={''}
-						onChange={''}
+						value={game.awayTeam}
+						onChange={handleChange}
 					/>
 					<button>add new game</button>
 				</form>
