@@ -43,14 +43,14 @@ describe('Test if input fields and add game button are working', () => {
 		expect(inputAwayTeamElement.value).toBe('testing');
 	});
 
-  it('add new game button should be disabled when both input fields are empty', ()=> {
-    render(<Scoreboard />);
-    const buttonElement = screen.getByRole('button', {name: 'add new game'});
-    expect(buttonElement).toBeDisabled();
-  });
+	it('add new game button should be disabled when both input fields are empty', () => {
+		render(<Scoreboard />);
+		const buttonElement = screen.getByRole('button', { name: 'add new game' });
+		expect(buttonElement).toBeDisabled();
+	});
 
-  it("add new button shouldn't be disabled when both input fields are not empty", () => {
-    render(<Scoreboard />);
+	it("add new button shouldn't be disabled when both input fields are not empty", () => {
+		render(<Scoreboard />);
 		const buttonElement = screen.getByRole('button', { name: 'add new game' });
 		const inputHomeTeamElement = screen.getByPlaceholderText('Home Team');
 		const inputAwayTeamElement = screen.getByPlaceholderText('Away Team');
@@ -58,6 +58,30 @@ describe('Test if input fields and add game button are working', () => {
 		fireEvent.change(inputHomeTeamElement, { target: { value: 'testing' } });
 		fireEvent.change(inputAwayTeamElement, { target: { value: 'testing' } });
 
-    expect(buttonElement).not.toBeDisabled();
-  });
+		expect(buttonElement).not.toBeDisabled();
+	});
+
+	it('should have empty input field for Home Team when add new game button is clicked', () => {
+    render(<Scoreboard />);
+		const inputHomeTeamElement = screen.getByPlaceholderText('Home Team');
+		const inputAwayTeamElement = screen.getByPlaceholderText('Away Team');
+		const buttonElement = screen.getByRole('button', { name: 'add new game' });
+    
+		fireEvent.change(inputHomeTeamElement, { target: { value: 'Germany' } });
+		fireEvent.change(inputAwayTeamElement, { target: { value: 'Germany' } });
+		fireEvent.click(buttonElement);
+		expect(inputHomeTeamElement.value).toBe('');
+	});
+
+	it('should have empty input field for Away Team when add new game button is clicked', () => {
+		render(<Scoreboard />);
+		const inputHomeTeamElement = screen.getByPlaceholderText('Home Team');
+		const inputAwayTeamElement = screen.getByPlaceholderText('Away Team');
+		const buttonElement = screen.getByRole('button', { name: 'add new game' });
+
+		fireEvent.change(inputHomeTeamElement, { target: { value: 'Germany' } });
+		fireEvent.change(inputAwayTeamElement, { target: { value: 'testing' } });
+		fireEvent.click(buttonElement);
+		expect(inputAwayTeamElement.value).toBe('');
+	});
 });
