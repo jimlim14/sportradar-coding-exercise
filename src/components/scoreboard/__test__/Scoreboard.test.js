@@ -21,6 +21,3 @@ describe('Test when scoreboard component is loaded', () => {
   });
 
 })
-
-
-
