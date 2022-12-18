@@ -42,4 +42,22 @@ describe('Test if input fields and add game button are working', () => {
 		fireEvent.change(inputAwayTeamElement, { target: { value: 'testing' } });
 		expect(inputAwayTeamElement.value).toBe('testing');
 	});
+
+  it('add new game button should be disabled when both input fields are empty', ()=> {
+    render(<Scoreboard />);
+    const buttonElement = screen.getByRole('button', {name: 'add new game'});
+    expect(buttonElement).toBeDisabled();
+  });
+
+  it("add new button shouldn't be disabled when both input fields are not empty", () => {
+    render(<Scoreboard />);
+		const buttonElement = screen.getByRole('button', { name: 'add new game' });
+		const inputHomeTeamElement = screen.getByPlaceholderText('Home Team');
+		const inputAwayTeamElement = screen.getByPlaceholderText('Away Team');
+
+		fireEvent.change(inputHomeTeamElement, { target: { value: 'testing' } });
+		fireEvent.change(inputAwayTeamElement, { target: { value: 'testing' } });
+
+    expect(buttonElement).not.toBeDisabled();
+  });
 });
