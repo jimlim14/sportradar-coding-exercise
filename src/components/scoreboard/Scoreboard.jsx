@@ -8,12 +8,25 @@ function Scoreboard() {
 		homeTeamScore: 0,
 		awayTeamScore: 0,
 	});
+	const [games, setGames] = useState([]);
 
 	function handleChange(e) {
 		const { name, value } = e.target;
 		setGame((prev) => ({
 			...prev,
 			[name]: value,
+		}));
+	}
+
+	function handleSubmitForm(e) {
+		e.preventDefault();
+		setGames((prev) => [...prev, game]);
+		setGame((prev) => ({
+			id: prev.id + 1,
+			homeTeam: '',
+			awayTeam: '',
+			homeTeamScore: 0,
+			awayTeamScore: 0,
 		}));
 	}
 
@@ -25,7 +38,7 @@ function Scoreboard() {
 		<>
 			<h1>Scoreboard</h1>
 			<div>
-				<form action=''>
+				<form onSubmit={handleSubmitForm}>
 					<input
 						type='text'
 						placeholder='Home Team'
@@ -43,6 +56,20 @@ function Scoreboard() {
 					<button disabled={buttonDisable()}>add new game</button>
 				</form>
 			</div>
+
+			<div>
+				{games &&
+					games.map((game, i) => (
+						<div key={i}>
+							<h2>
+								{game.homeTeam} {game.homeTeamScore} - {game.awayTeamScore}{' '}
+								{game.awayTeam}
+							</h2>
+							<button>update</button>
+						</div>
+					))}
+			</div>
+
 		</>
 	);
 }
