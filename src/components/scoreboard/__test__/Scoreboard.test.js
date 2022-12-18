@@ -10,8 +10,10 @@ describe('Test when scoreboard component is loaded', () => {
   
   it('should have 2 input fields', () => {
     render(<Scoreboard />);
-    const inputElements = screen.getAllByRole('textbox');
-    expect(inputElements.length).toBe(2);
+    const inputHomeTeamElement = screen.getByPlaceholderText('Home Team');
+    const inputAwayTeamElement = screen.getByPlaceholderText('Away Team');
+    expect(inputHomeTeamElement).toBeInTheDocument();
+    expect(inputAwayTeamElement).toBeInTheDocument();
   });
   
   it('should have a button for adding new game', () => {
