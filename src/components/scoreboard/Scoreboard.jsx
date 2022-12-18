@@ -17,11 +17,15 @@ function Scoreboard() {
 		}));
 	}
 
+	function buttonDisable() {
+		return game.homeTeam && game.awayTeam ? false : true;
+	}
+
 	return (
 		<>
 			<h1>Scoreboard</h1>
 			<div>
-				<form action='' onSubmit={''}>
+				<form action=''>
 					<input
 						type='text'
 						placeholder='Home Team'
@@ -36,7 +40,7 @@ function Scoreboard() {
 						value={game.awayTeam}
 						onChange={handleChange}
 					/>
-					<button>add new game</button>
+					<button disabled={buttonDisable()}>add new game</button>
 				</form>
 			</div>
 		</>
