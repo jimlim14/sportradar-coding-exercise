@@ -61,11 +61,11 @@ describe('Test if input fields and add game button are working', () => {
 	});
 
 	it('should have empty input field for Home Team when add new game button is clicked', () => {
-    render(<Scoreboard />);
+		render(<Scoreboard />);
 		const inputHomeTeamElement = screen.getByPlaceholderText('Home Team');
 		const inputAwayTeamElement = screen.getByPlaceholderText('Away Team');
 		const buttonElement = screen.getByRole('button', { name: 'add new game' });
-    
+
 		fireEvent.change(inputHomeTeamElement, { target: { value: 'Germany' } });
 		fireEvent.change(inputAwayTeamElement, { target: { value: 'Germany' } });
 		fireEvent.click(buttonElement);
@@ -94,8 +94,24 @@ describe('Test if input fields and add game button are working', () => {
 		fireEvent.change(inputAwayTeamElement, { target: { value: 'Spain' } });
 		fireEvent.click(buttonElement);
 
-		const divElement = screen.getByText('Germany 0 - 0 Spain');
-		expect(divElement).toBeInTheDocument();
+		const headingElement = screen.getByRole('heading', {
+			name: 'Germany 0 - 0 Spain',
+			level: 2,
+		});
+		expect(headingElement).toBeInTheDocument();
+	});
+
+	it('should have an update button when a new game is added', () => {
+		render(<Scoreboard />);
+		const inputHomeTeamElement = screen.getByPlaceholderText('Home Team');
+		const inputAwayTeamElement = screen.getByPlaceholderText('Away Team');
+		const buttonElement = screen.getByRole('button', { name: 'add new game' });
+
+		fireEvent.change(inputHomeTeamElement, { target: { value: 'Germany' } });
+		fireEvent.change(inputAwayTeamElement, { target: { value: 'Spain' } });
+		fireEvent.click(buttonElement);
+
+		const updateButtonElement = screen.getByText('update');
+		expect(updateButtonElement).toBeInTheDocument();
 	});
 });
-
