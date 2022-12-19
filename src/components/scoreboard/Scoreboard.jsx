@@ -44,6 +44,12 @@ function Scoreboard() {
 		}));
 	}
 
+	function deleteGame(gameId) {
+		setGames((prev) => {
+			return prev.filter((game) => game.id !== gameId);
+		});
+	}
+
 	function buttonDisable() {
 		return newGame.homeTeam && newGame.awayTeam ? false : true;
 	}
@@ -80,7 +86,7 @@ function Scoreboard() {
 									{game.homeTeam} {game.homeTeamScore} - {game.awayTeamScore}{' '}
 									{game.awayTeam}
 								</h2>
-								<button>finish</button>
+								<button onClick={() => deleteGame(game.id)}>finish</button>
 							</div>
 
 							<input
