@@ -142,4 +142,27 @@ describe('Test if input fields and add game button are working', () => {
 		const finishButtonElement = screen.getByPlaceholderText('Away Score');
 		expect(finishButtonElement).toBeInTheDocument();
 	});
+
+	it('should render multiple games correctly', () => {
+		render(<Scoreboard />);
+		const inputHomeTeamElement = screen.getByPlaceholderText('Home Team');
+		const inputAwayTeamElement = screen.getByPlaceholderText('Away Team');
+		const buttonElement = screen.getByRole('button', { name: 'add new game' });
+
+		fireEvent.change(inputHomeTeamElement, { target: { value: 'Germany' } });
+		fireEvent.change(inputAwayTeamElement, { target: { value: 'Spain' } });
+		fireEvent.click(buttonElement);
+
+		fireEvent.change(inputHomeTeamElement, { target: { value: 'a' } });
+		fireEvent.change(inputAwayTeamElement, { target: { value: 'b' } });
+		fireEvent.click(buttonElement);
+
+		fireEvent.change(inputHomeTeamElement, { target: { value: 'c' } });
+		fireEvent.change(inputAwayTeamElement, { target: { value: 'd' } });
+		fireEvent.click(buttonElement);
+
+		const divElements = screen.getAllByTestId('game-container');
+		expect(divElements.length).toBe(3);
+	});
 });
+
