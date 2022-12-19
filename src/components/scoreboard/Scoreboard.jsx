@@ -18,6 +18,20 @@ function Scoreboard() {
 		}));
 	}
 
+	function handleScoreChange(e, gameId) {
+		const { name, value } = e.target;
+		const copiedGames = [...games];
+		const newGames = copiedGames.map((game) => {
+			if (game.id === gameId)
+				return {
+					...game,
+					[name]: value,
+				};
+			else return game;
+		});
+		setGames(newGames);
+	}
+
 	function handleSubmitForm(e) {
 		e.preventDefault();
 		setGames((prev) => [...prev, { time: Date.now(), ...newGame }]);
@@ -61,7 +75,7 @@ function Scoreboard() {
 				{games &&
 					games.map((game, i) => (
 						<div key={i}>
-							<div>
+							<div data-testid='game-container'>
 								<h2>
 									{game.homeTeam} {game.homeTeamScore} - {game.awayTeamScore}{' '}
 									{game.awayTeam}
@@ -73,13 +87,13 @@ function Scoreboard() {
 								type='number'
 								placeholder='Home Score'
 								name='homeTeamScore'
-								onChange={''}
+								onChange={(e) => handleScoreChange(e, game.id)}
 							/>
 							<input
 								type='number'
 								placeholder='Away Score'
 								name='awayTeamScore'
-								onChange={''}
+								onChange={(e) => handleScoreChange(e, game.id)}
 							/>
 						</div>
 					))}
