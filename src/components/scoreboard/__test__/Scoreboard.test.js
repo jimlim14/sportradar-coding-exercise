@@ -239,3 +239,48 @@ describe('test if update fields are working', () => {
 		expect(headingElement).toBeInTheDocument();
 	});
 });
+
+describe('test if finish game button is working', () => {
+	it('should be able to delete a specific game', () => {
+		render(<Scoreboard />);
+
+		const inputHomeTeamElement = screen.getByPlaceholderText('Home Team');
+		const inputAwayTeamElement = screen.getByPlaceholderText('Away Team');
+		const buttonElement = screen.getByRole('button', { name: 'add new game' });
+
+		fireEvent.change(inputHomeTeamElement, { target: { value: 'Germany' } });
+		fireEvent.change(inputAwayTeamElement, { target: { value: 'Spain' } });
+		fireEvent.click(buttonElement);
+
+		fireEvent.change(inputHomeTeamElement, { target: { value: 'Argentina' } });
+		fireEvent.change(inputAwayTeamElement, { target: { value: 'France' } });
+		fireEvent.click(buttonElement);
+
+		fireEvent.change(inputHomeTeamElement, { target: { value: 'Morocco' } });
+		fireEvent.change(inputAwayTeamElement, { target: { value: 'Croatia' } });
+		fireEvent.click(buttonElement);
+
+		const finishButtonElements = screen.getAllByRole('button', {
+			name: 'finish',
+		});
+
+		fireEvent.click(finishButtonElements[1]);
+
+		const headingElement1 = screen.getByRole('heading', {
+			name: 'Germany 0 - 0 Spain',
+			level: 2,
+		});
+		const headingElement2 = screen.queryByRole('heading', {
+			name: 'Argentina 0 - 0 France',
+			level: 2,
+		});
+		const headingElement3 = screen.getByRole('heading', {
+			name: 'Morocco 0 - 0 Croatia',
+			level: 2,
+		});
+
+		expect(headingElement1).toBeInTheDocument();
+		expect(headingElement2).not.toBeInTheDocument();
+		expect(headingElement3).toBeInTheDocument();
+	});
+});
