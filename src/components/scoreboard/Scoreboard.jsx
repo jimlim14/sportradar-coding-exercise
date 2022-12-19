@@ -10,7 +10,7 @@ function Scoreboard() {
 	});
 	const [games, setGames] = useState([]);
 
-	function handleNewGameChange(e, gameId) {
+	function handleNewGameChange(e) {
 		const { name, value } = e.target;
 		setNewGame((prev) => ({
 			...prev,
@@ -54,9 +54,14 @@ function Scoreboard() {
 		return newGame.homeTeam && newGame.awayTeam ? false : true;
 	}
 
+	function summaryButtonDisable(){
+		return games.length ? false : true;
+	}
+
 	return (
-		<>
+		<div>
 			<h1>Scoreboard</h1>
+			<button disabled={summaryButtonDisable()}>Get Summary</button>
 			<div>
 				<form onSubmit={handleSubmitForm}>
 					<input
@@ -104,7 +109,7 @@ function Scoreboard() {
 						</div>
 					))}
 			</div>
-		</>
+		</div>
 	);
 }
 
