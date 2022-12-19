@@ -101,7 +101,7 @@ describe('Test if input fields and add game button are working', () => {
 		expect(headingElement).toBeInTheDocument();
 	});
 
-	it('should have an update button when a new game is added', () => {
+	it('should have a finish button when a new game is added', () => {
 		render(<Scoreboard />);
 		const inputHomeTeamElement = screen.getByPlaceholderText('Home Team');
 		const inputAwayTeamElement = screen.getByPlaceholderText('Away Team');
@@ -111,7 +111,35 @@ describe('Test if input fields and add game button are working', () => {
 		fireEvent.change(inputAwayTeamElement, { target: { value: 'Spain' } });
 		fireEvent.click(buttonElement);
 
-		const updateButtonElement = screen.getByText('update');
+		const updateButtonElement = screen.getByText('finish');
 		expect(updateButtonElement).toBeInTheDocument();
+	});
+
+	it('should have an input field to update home team score for each game', () => {
+		render(<Scoreboard />);
+		const inputHomeTeamElement = screen.getByPlaceholderText('Home Team');
+		const inputAwayTeamElement = screen.getByPlaceholderText('Away Team');
+		const buttonElement = screen.getByRole('button', { name: 'add new game' });
+
+		fireEvent.change(inputHomeTeamElement, { target: { value: 'Germany' } });
+		fireEvent.change(inputAwayTeamElement, { target: { value: 'Spain' } });
+		fireEvent.click(buttonElement);
+
+		const finishButtonElement = screen.getByPlaceholderText('Home Score');
+		expect(finishButtonElement).toBeInTheDocument();
+	})
+
+	it('should have an input field to update away team score for each game', () => {
+		render(<Scoreboard />);
+		const inputHomeTeamElement = screen.getByPlaceholderText('Home Team');
+		const inputAwayTeamElement = screen.getByPlaceholderText('Away Team');
+		const buttonElement = screen.getByRole('button', { name: 'add new game' });
+
+		fireEvent.change(inputHomeTeamElement, { target: { value: 'Germany' } });
+		fireEvent.change(inputAwayTeamElement, { target: { value: 'Spain' } });
+		fireEvent.click(buttonElement);
+
+		const finishButtonElement = screen.getByPlaceholderText('Away Score');
+		expect(finishButtonElement).toBeInTheDocument();
 	});
 });
