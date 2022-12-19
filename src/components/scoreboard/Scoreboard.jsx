@@ -1,7 +1,7 @@
 import { useState } from 'react';
 
 function Scoreboard() {
-	const [game, setGame] = useState({
+	const [newGame, setNewGame] = useState({
 		id: 1,
 		homeTeam: '',
 		awayTeam: '',
@@ -10,9 +10,9 @@ function Scoreboard() {
 	});
 	const [games, setGames] = useState([]);
 
-	function handleChange(e) {
+	function handleNewGameChange(e, gameId) {
 		const { name, value } = e.target;
-		setGame((prev) => ({
+		setNewGame((prev) => ({
 			...prev,
 			[name]: value,
 		}));
@@ -20,8 +20,8 @@ function Scoreboard() {
 
 	function handleSubmitForm(e) {
 		e.preventDefault();
-		setGames((prev) => [...prev, game]);
-		setGame((prev) => ({
+		setGames((prev) => [...prev, { time: Date.now(), ...newGame }]);
+		setNewGame((prev) => ({
 			id: prev.id + 1,
 			homeTeam: '',
 			awayTeam: '',
@@ -31,7 +31,7 @@ function Scoreboard() {
 	}
 
 	function buttonDisable() {
-		return game.homeTeam && game.awayTeam ? false : true;
+		return newGame.homeTeam && newGame.awayTeam ? false : true;
 	}
 
 	return (
@@ -43,15 +43,15 @@ function Scoreboard() {
 						type='text'
 						placeholder='Home Team'
 						name='homeTeam'
-						value={game.homeTeam}
-						onChange={handleChange}
+						value={newGame.homeTeam}
+						onChange={handleNewGameChange}
 					/>
 					<input
 						type='text'
 						placeholder='Away Team'
 						name='awayTeam'
-						value={game.awayTeam}
-						onChange={handleChange}
+						value={newGame.awayTeam}
+						onChange={handleNewGameChange}
 					/>
 					<button disabled={buttonDisable()}>add new game</button>
 				</form>
@@ -61,15 +61,29 @@ function Scoreboard() {
 				{games &&
 					games.map((game, i) => (
 						<div key={i}>
-							<h2>
-								{game.homeTeam} {game.homeTeamScore} - {game.awayTeamScore}{' '}
-								{game.awayTeam}
-							</h2>
-							<button>update</button>
+							<div>
+								<h2>
+									{game.homeTeam} {game.homeTeamScore} - {game.awayTeamScore}{' '}
+									{game.awayTeam}
+								</h2>
+								<button>finish</button>
+							</div>
+
+							<input
+								type='number'
+								placeholder='Home Score'
+								name='homeTeamScore'
+								onChange={''}
+							/>
+							<input
+								type='number'
+								placeholder='Away Score'
+								name='awayTeamScore'
+								onChange={''}
+							/>
 						</div>
 					))}
 			</div>
-
 		</>
 	);
 }
