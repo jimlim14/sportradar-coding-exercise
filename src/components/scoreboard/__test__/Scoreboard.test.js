@@ -25,6 +25,12 @@ describe('Test when scoreboard component is loaded', () => {
 		const buttonElement = screen.getByRole('button', { name: 'add new game' });
 		expect(buttonElement).toBeInTheDocument();
 	});
+
+	it('should have a get summary button', () => {
+		render(<Scoreboard />);
+		const summaryButtonElement = screen.getByRole('button', {name: 'Get Summary'});
+		expect(summaryButtonElement).toBeInTheDocument();
+	})
 });
 
 describe('Test if input fields and add game button are working', () => {
@@ -40,6 +46,29 @@ describe('Test if input fields and add game button are working', () => {
 		const inputAwayTeamElement = screen.getByPlaceholderText('Away Team');
 		fireEvent.change(inputAwayTeamElement, { target: { value: 'testing' } });
 		expect(inputAwayTeamElement.value).toBe('testing');
+	});
+
+	it('get summary button should be disabled when no game in progress', () => {
+		render(<Scoreboard />);
+		const summaryButtonElement = screen.getByRole('button', {name: 'Get Summary'});
+		expect(summaryButtonElement).toBeDisabled();
+	});
+
+	it("get summary button shouldn't be disabled when there is game in progress", () => {
+		render(<Scoreboard />);
+		const summaryButtonElement = screen.getByRole('button', {
+			name: 'Get Summary',
+		});
+		
+		const inputHomeTeamElement = screen.getByPlaceholderText('Home Team');
+		const inputAwayTeamElement = screen.getByPlaceholderText('Away Team');
+		const buttonElement = screen.getByRole('button', { name: 'add new game' });
+
+		fireEvent.change(inputHomeTeamElement, { target: { value: 'testing' } });
+		fireEvent.change(inputAwayTeamElement, { target: { value: 'testing' } });
+		fireEvent.click(buttonElement);
+
+		expect(summaryButtonElement).not.toBeDisabled();
 	});
 
 	it('add new game button should be disabled when both input fields are empty', () => {
