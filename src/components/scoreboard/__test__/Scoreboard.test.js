@@ -268,6 +268,56 @@ describe('test if update fields are working', () => {
 		});
 		expect(headingElement).toBeInTheDocument();
 	});
+
+	it("shouldn't be able to update other game's Home Team Score", () => {
+		render(<Scoreboard />);
+
+		const inputHomeTeamElement = screen.getByPlaceholderText('Home Team');
+		const inputAwayTeamElement = screen.getByPlaceholderText('Away Team');
+		const buttonElement = screen.getByRole('button', { name: 'add new game' });
+
+		fireEvent.change(inputHomeTeamElement, { target: { value: 'Germany' } });
+		fireEvent.change(inputAwayTeamElement, { target: { value: 'Spain' } });
+		fireEvent.click(buttonElement);
+
+		fireEvent.change(inputHomeTeamElement, { target: { value: 'Argentina' } });
+		fireEvent.change(inputAwayTeamElement, { target: { value: 'France' } });
+		fireEvent.click(buttonElement);
+
+		const inputHomeScoreElements = screen.getAllByPlaceholderText('Home Score');
+		fireEvent.change(inputHomeScoreElements[0], { target: { value: '1' } });
+
+		const headingElement = screen.getByRole('heading', {
+			name: 'Argentina 0 - 0 France',
+			level: 2,
+		});
+		expect(headingElement).toBeInTheDocument()
+	});
+
+	it("shouldn't be able to update other game's Away Team Score", () => {
+		render(<Scoreboard />);
+
+		const inputHomeTeamElement = screen.getByPlaceholderText('Home Team');
+		const inputAwayTeamElement = screen.getByPlaceholderText('Away Team');
+		const buttonElement = screen.getByRole('button', { name: 'add new game' });
+
+		fireEvent.change(inputHomeTeamElement, { target: { value: 'Germany' } });
+		fireEvent.change(inputAwayTeamElement, { target: { value: 'Spain' } });
+		fireEvent.click(buttonElement);
+
+		fireEvent.change(inputHomeTeamElement, { target: { value: 'Argentina' } });
+		fireEvent.change(inputAwayTeamElement, { target: { value: 'France' } });
+		fireEvent.click(buttonElement);
+
+		const inputAwayScoreElements = screen.getAllByPlaceholderText('Away Score');
+		fireEvent.change(inputAwayScoreElements[0], { target: { value: '1' } });
+
+		const headingElement = screen.getByRole('heading', {
+			name: 'Argentina 0 - 0 France',
+			level: 2,
+		});
+		expect(headingElement).toBeInTheDocument();
+	});
 });
 
 describe('test if finish game button is working', () => {
