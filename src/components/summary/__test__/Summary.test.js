@@ -61,7 +61,7 @@ describe('test Summary component', () => {
 
 	it('should show a summary of games in progress ordered by their total score, The games with the same total score will be returned ordered by the most recently started match in the scoreboard', () => {
 		render(<Summary games={games} />);
-		const headingElements = screen.getAllByTestId('testing', { exact: false });
+		const headingElements = screen.getAllByTestId('summary-heading', { exact: false });
 		expect(headingElements.length).toBe(5);
 		expect(headingElements[0]).toHaveTextContent('1. Uruguay 6 - 6 Italy');
 		expect(headingElements[1]).toHaveTextContent('2. Spain 10 - 2 Brazil');
