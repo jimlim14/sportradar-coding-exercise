@@ -21,7 +21,7 @@ total score will be returned ordered by the most recently started match in the s
 
 ### GETTING STARTED
 
-First, First, clone this repository, cd to project's directory and install the dependencies either by npm or yarn:
+First, clone this repository, cd to project's directory and install the dependencies either by npm or yarn:
 
 ```bash
 git clone https://github.com/jimlim14/sportradar-coding-exercise.git
@@ -43,3 +43,13 @@ If you would like to run the test, simply run the code below:
 ```bash
 npm test
 ```
+
+### STEPS
+1. Input Home Team and Away Team and click add new game button to add a new game to the scoreboard.
+2. Update Home Teamd Score and Away Team Score by simply typing numbers on the Home Score and Away Score update fields.
+3. If you would like to delete/finish a game simply click on each game's finish game button. It will be removed from the scoreboard and from the summary.
+4. A summary will automatically show when there is game(s) on progress on the scoreboard, ordered by their total score and the games with the same total score will be returned ordered by the most recently started match in the scoreboard.
+
+### EXAMPLE
+[Screenshot 2022-12-20 at 20 46 23](https://user-images.githubusercontent.com/88963740/208753524-ad975e93-e74d-4205-82e6-b8206b006361.png)
+AMPLE RESULT
