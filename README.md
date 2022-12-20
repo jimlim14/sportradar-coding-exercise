@@ -51,5 +51,6 @@ npm test
 4. A summary will automatically show when there is game(s) on progress on the scoreboard, ordered by their total score and the games with the same total score will be returned ordered by the most recently started match in the scoreboard.
 
 ### EXAMPLE
-[Screenshot 2022-12-20 at 20 46 23](https://user-images.githubusercontent.com/88963740/208753524-ad975e93-e74d-4205-82e6-b8206b006361.png)
-AMPLE RESULT
+![Screenshot 2022-12-20 at 20 46 23](https://user-images.githubusercontent.com/88963740/208753814-abf142ed-a918-4581-ba3d-280a73e8ca31.png)
+
+
