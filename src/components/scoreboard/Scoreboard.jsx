@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import Summary from '../summary/Summary';
 
 function Scoreboard() {
 	const [newGame, setNewGame] = useState({
@@ -9,6 +10,7 @@ function Scoreboard() {
 		awayTeamScore: 0,
 	});
 	const [games, setGames] = useState([]);
+	const [summaryButtonClicked, setSummaryButtonClicked] = useState(false);
 
 	function handleNewGameChange(e) {
 		const { name, value } = e.target;
@@ -54,14 +56,20 @@ function Scoreboard() {
 		return newGame.homeTeam && newGame.awayTeam ? false : true;
 	}
 
-	function summaryButtonDisable(){
+	function summaryButtonDisable() {
 		return games.length ? false : true;
+	}
+
+	function summaryButton() {
+		setSummaryButtonClicked(true);
 	}
 
 	return (
 		<div>
 			<h1>Scoreboard</h1>
-			<button disabled={summaryButtonDisable()}>Get Summary</button>
+			<button disabled={summaryButtonDisable()} onClick={summaryButton}>
+				Get Summary
+			</button>
 			<div>
 				<form onSubmit={handleSubmitForm}>
 					<input
@@ -109,6 +117,8 @@ function Scoreboard() {
 						</div>
 					))}
 			</div>
+
+			{summaryButtonClicked && <Summary games={games} />}
 		</div>
 	);
 }
