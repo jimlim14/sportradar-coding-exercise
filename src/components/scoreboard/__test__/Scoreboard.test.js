@@ -199,6 +199,36 @@ describe('test if update fields are working', () => {
 		expect(inputAwayScoreElement.value).toBe('1');
 	});
 
+	it("shouldn't be able to go below 0 on Home Team update field", ()=> {
+		render(<Scoreboard />);
+		const inputHomeTeamElement = screen.getByPlaceholderText('Home Team');
+		const inputAwayTeamElement = screen.getByPlaceholderText('Away Team');
+		const buttonElement = screen.getByRole('button', { name: 'add new game' });
+
+		fireEvent.change(inputHomeTeamElement, { target: { value: 'Germany' } });
+		fireEvent.change(inputAwayTeamElement, { target: { value: 'Spain' } });
+		fireEvent.click(buttonElement);
+
+		const inputHomeScoreElement = screen.getByPlaceholderText('Home Score');
+		fireEvent.change(inputHomeScoreElement, { target: { value: '-1' } });
+		expect(inputHomeScoreElement).not.toBe('-1')
+	})
+
+	it("shouldn't be able to go below 0 on Away Team update field", () => {
+		render(<Scoreboard />);
+		const inputHomeTeamElement = screen.getByPlaceholderText('Home Team');
+		const inputAwayTeamElement = screen.getByPlaceholderText('Away Team');
+		const buttonElement = screen.getByRole('button', { name: 'add new game' });
+
+		fireEvent.change(inputHomeTeamElement, { target: { value: 'Germany' } });
+		fireEvent.change(inputAwayTeamElement, { target: { value: 'Spain' } });
+		fireEvent.click(buttonElement);
+
+		const inputHomeScoreElement = screen.getByPlaceholderText('Home Score');
+		fireEvent.change(inputHomeScoreElement, { target: { value: '-1' } });
+		expect(inputHomeScoreElement).not.toBe('-1');
+	});
+
 	it('should be able to update on Home Team Score', () => {
 		render(<Scoreboard />);
 
