@@ -33,7 +33,7 @@ describe('Test when scoreboard component is loaded', () => {
 	})
 });
 
-describe('Test if input fields and add game button are working', () => {
+describe('Test if input fields and buttons are working', () => {
 	it('should be able to input text on Home Team input field', () => {
 		render(<Scoreboard />);
 		const inputHomeTeamElement = screen.getByPlaceholderText('Home Team');

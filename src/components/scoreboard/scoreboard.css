@@ -1,0 +1,21 @@
+.container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+
+.game-container {
+  display: flex;
+  flex-direction: row;
+}
+
+.title-container {
+  display: flex;
+  flex-direction: row;
+}
+
+.button-style {
+	height: 20;
+	align-self: center;
+	margin-left: 20px;
+}
