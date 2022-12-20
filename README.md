@@ -19,3 +19,27 @@ team score.
 4. Get a summary of games in progress ordered by their total score. The games with the same
 total score will be returned ordered by the most recently started match in the scoreboard.
 
+### GETTING STARTED
+
+First, First, clone this repository, cd to project's directory and install the dependencies either by npm or yarn:
+
+```bash
+git clone https://github.com/jimlim14/sportradar-coding-exercise.git
+cd sportradar-coding-exercise
+
+npm install
+or
+yarn install
+```
+
+Simply run the code below to start the application on http://localhost:3000/:
+
+```bash
+npm start
+```
+
+If you would like to run the test, simply run the code below:
+
+```bash
+npm test
+```
