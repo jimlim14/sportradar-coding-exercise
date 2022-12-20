@@ -113,6 +113,7 @@ function Scoreboard() {
 
 								<input
 									type='number'
+									min='0'
 									placeholder='Home Score'
 									name='homeTeamScore'
 									onChange={(e) => handleScoreChange(e, game.id)}
@@ -120,6 +121,7 @@ function Scoreboard() {
 								<input
 									type='number'
 									placeholder='Away Score'
+									min='0'
 									name='awayTeamScore'
 									onChange={(e) => handleScoreChange(e, game.id)}
 								/>
