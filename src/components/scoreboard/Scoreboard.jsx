@@ -11,7 +11,6 @@ function Scoreboard() {
 		awayTeamScore: 0,
 	});
 	const [games, setGames] = useState([]);
-	const [summaryButtonClicked, setSummaryButtonClicked] = useState(false);
 
 	function handleNewGameChange(e) {
 		const { name, value } = e.target;
@@ -57,22 +56,11 @@ function Scoreboard() {
 		return newGame.homeTeam && newGame.awayTeam ? false : true;
 	}
 
-	function summaryButtonDisable() {
-		return games.length ? false : true;
-	}
-
-	function summaryButton() {
-		setSummaryButtonClicked(true);
-	}
-
 	return (
 		<div className='container'>
 			<div>
 				<div className='title-container'>
 					<h1>Scoreboard</h1>
-					<button disabled={summaryButtonDisable()} onClick={summaryButton} className='button-style'>
-						Get Summary
-					</button>
 				</div>
 				<div>
 					<form onSubmit={handleSubmitForm}>
@@ -130,7 +118,7 @@ function Scoreboard() {
 				</div>
 			</div>
 
-			<div>{summaryButtonClicked && <Summary games={games} />}</div>
+			<div><Summary games={games} /></div>
 		</div>
 	);
 }
