@@ -1,6 +1,22 @@
 function Summary({ games }) {
 	function sorting() {
 		const copiedGames = [...games];
+		// copiedGames.sort((a, b) => {
+		// 	const totalAScore = +a.homeTeamScore + +a.awayTeamScore;
+		// 	const totalBScore = +b.homeTeamScore + +b.awayTeamScore;
+
+		// 	return totalBScore - totalAScore;
+		// });
+
+		// copiedGames.sort((a, b) => {
+		// 	const totalAScore = +a.homeTeamScore + +a.awayTeamScore;
+		// 	const totalBScore = +b.homeTeamScore + +b.awayTeamScore;
+
+		// 	if (totalAScore === totalBScore) return b.time - a.time;
+		// 	return 0;
+		// });
+		// return copiedGames;
+
 		copiedGames.sort((a, b) => {
 			const totalAScore = +a.homeTeamScore + +a.awayTeamScore;
 			const totalBScore = +b.homeTeamScore + +b.awayTeamScore;
