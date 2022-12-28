@@ -1,8 +1,8 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Summary from '../summary/Summary';
 import './scoreboard.css';
 
-function Scoreboard() {
+function Scoreboard({tournament}) {
 	const [newGame, setNewGame] = useState({
 		id: 1,
 		homeTeam: '',
@@ -11,6 +11,12 @@ function Scoreboard() {
 		awayTeamScore: 0,
 	});
 	const [games, setGames] = useState([]);
+
+	useEffect(() => {
+		fetch(`http://127.0.0.1:3001/scoreboard/1`)
+			.then(res => res.json())
+			.then(foundGame => setGames(foundGame));
+	}, [])
 
 	function handleNewGameChange(e) {
 		const { name, value } = e.target;
@@ -84,41 +90,47 @@ function Scoreboard() {
 
 				<div>
 					{games &&
-						games.map((game, i) => (
-							<div key={i}>
-								<div data-testid='game-container' className='game-container'>
-									<h2>
-										{game.homeTeam} {game.homeTeamScore} - {game.awayTeamScore}{' '}
-										{game.awayTeam}
-									</h2>
-									<button
-										className='button-style'
-										onClick={() => deleteGame(game.id)}
-									>
-										finish
-									</button>
-								</div>
+						games.map((tournament, i) => (
+							<>
+								{tournament.data.map((game) => (
+									<div key={i}>
+										<div data-testid='game-container' className='game-container'>
+											<h2>
+												{game.homeTeam} {game.homeTeamScore} -{' '}
+												{game.awayTeamScore} {game.awayTeam}
+											</h2>
+											<button
+												className='button-style'
+												onClick={() => deleteGame(game.id)}
+											>
+												finish
+											</button>
+										</div>
 
-								<input
-									type='number'
-									min='0'
-									placeholder='Home Score'
-									name='homeTeamScore'
-									onChange={(e) => handleScoreChange(e, game.id)}
-								/>
-								<input
-									type='number'
-									placeholder='Away Score'
-									min='0'
-									name='awayTeamScore'
-									onChange={(e) => handleScoreChange(e, game.id)}
-								/>
-							</div>
+										<input
+											type='number'
+											min='0'
+											placeholder='Home Score'
+											name='homeTeamScore'
+											onChange={(e) => handleScoreChange(e, game.id)}
+										/>
+										<input
+											type='number'
+											placeholder='Away Score'
+											min='0'
+											name='awayTeamScore'
+											onChange={(e) => handleScoreChange(e, game.id)}
+										/>
+									</div>
+								))}
+							</>
 						))}
 				</div>
 			</div>
 
-			<div><Summary games={games} /></div>
+			<div>
+				{/* <Summary games={games} /> */}
+			</div>
 		</div>
 	);
 }
