@@ -1,6 +1,6 @@
 function Summary({ games }) {
 	function sorting() {
-		const copiedGames = [...games[0].data];
+		const copiedGames = [...games];
 
 		copiedGames.sort((a, b) => {
 			const totalAScore = +a.homeTeamScore + +a.awayTeamScore;

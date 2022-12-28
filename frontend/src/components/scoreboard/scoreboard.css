@@ -9,11 +9,6 @@
   flex-direction: row;
 }
 
-.title-container {
-  display: flex;
-  flex-direction: row;
-}
-
 .button-style {
 	height: 20;
 	align-self: center;
