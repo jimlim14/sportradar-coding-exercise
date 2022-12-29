@@ -89,8 +89,11 @@ cd backend
 npm run dev
 ```
 
-***If you encounter this problem (picture shown below), simply go to your Docker Desktop App and manually run the container***
+***If you encounter this problem (1st picture below), simply go to your Docker Desktop App and manually run the container (2nd picture below)***
 
+![Screenshot 2022-12-29 at 10 15 35](https://user-images.githubusercontent.com/88963740/209930120-2222ef46-9bd0-4ed9-8e42-403a182336df.png)
+
+![Screenshot 2022-12-29 at 10 12 25](https://user-images.githubusercontent.com/88963740/209930037-1a044274-b3d6-47e5-bce4-22f68671a186.png)
 
 
 ### STEPS
