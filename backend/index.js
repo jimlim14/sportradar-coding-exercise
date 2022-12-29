@@ -9,6 +9,4 @@ app
 	.use(cors())
 	.use(express.json())
 	.use(router)
-	.listen(port, () =>
-		console.log('solo project server running on port: ' + port)
-	);
+	.listen(port, () => console.log('server may be running on port: 3001, 3002, or 3003'));
